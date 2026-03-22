@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -14,13 +15,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" className="h-full">
-      <head>
-        <script
-          type="text/javascript"
+      <body className="min-h-full flex flex-col antialiased">
+        {children}
+        <Script
           src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_MAP_KEY}&autoload=false`}
+          strategy="beforeInteractive"
         />
-      </head>
-      <body className="min-h-full flex flex-col antialiased">{children}</body>
+      </body>
     </html>
   );
 }
